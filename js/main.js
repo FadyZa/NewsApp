@@ -9,7 +9,7 @@
  */
 
 
-const api = "https://newsapi.org/v2/top-headlines?country=eg&category=technology&apiKey=58e4d227704442b09374b6f78de780af";
+const api = "https://newsdata.io/api/1/news?apikey=pub_13498c5eafee9357f3a1a2169b8b4be00892b&country=eg&language=ar&category=sports";
 
 async function getData(callB){
     let data = await fetch(api)
@@ -24,16 +24,15 @@ console.log(container);
 function handleData(data){
     // console.log(data.articles)
 
-    for(article in data.articles){
+    for(result in data.results){
+        console.log(data.results[result].title)
         let myCard = document.createElement("div");
         myCard.className = "card";
-        myCard.innerHTML = `<img src="${data.articles[article].urlToImage == null ? "https://img.freepik.com/premium-vector/news-concept-illustration-flat-design_23-2148268772.jpg?w=2000" : data.articles[article].urlToImage }" alt="news picture">
+        myCard.innerHTML = `<img src="${data.results[result].image_url == null ? "https://img.freepik.com/premium-vector/news-concept-illustration-flat-design_23-2148268772.jpg?w=2000" : data.results[result].image_url }" alt="news picture">
         <div class="card-body">
-            <p class="desc">${data.articles[article].description == null ? "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos dolorem accusamusdoloremque consectetur impedit alias." : data.articles[article].description}</p>
+            <p class="desc">${data.results[result].description == null ? "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos dolorem accusamusdoloremque consectetur impedit alias." : data.results[result].description }</p>
         </div>
-        <h3 class="title">${data.articles[article].title == null ? "Lorem ipsum dolor sit, amet consectetur" : data.articles[article].title}</h3>`;
+        <h3 class="title">${data.results[result].title == null ? "Lorem ipsum dolor sit, amet consectetur" : data.results[result].title}</h3>`;
         container.append(myCard);
     }
 }
-
-
